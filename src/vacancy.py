@@ -1,40 +1,39 @@
-
 class Vacancy:
-    '''
+    """
     Класс для работы с вакансиями.
     Класс поддерживает методы сравнения вакансий
-    '''
+    """
 
     def __init__(self, info: dict):
-        self.vacancy_name = info.get('name')
-        self.vacancy_area = info.get('area')
-        self.vacancy_url = info.get('url')
-        self.salary_start = info.get('from')
-        self.salary_end = info.get('to')
-        self.currency = info.get('currency')
-        self.experience = info.get('experience', 'Не указано')
-        self.requirements = info.get('requirements', 'Не указано')
+        self.vacancy_name = info.get("name")
+        self.vacancy_area = info.get("area")
+        self.vacancy_url = info.get("url")
+        self.salary_start = info.get("from")
+        self.salary_end = info.get("to")
+        self.currency = info.get("currency")
+        self.experience = info.get("experience", "Не указано")
+        self.requirements = info.get("requirements", "Не указано")
 
     def get_average_salary(self):
-        '''Метод для определения средней зарплаты одной вакансии'''
+        """Метод для определения средней зарплаты одной вакансии"""
         avg_salary = (self.salary_start - self.salary_end) / 2
         return avg_salary
 
     def __sub__(self, other):
-        '''Разница между зарплатами двух разных вакансий'''
+        """Разница между зарплатами двух разных вакансий"""
         if isinstance(other, Vacancy):
             return self.get_average_salary() - other.get_average_salary()
 
     def get_validate_data(self):
-        '''Метод для валидации зарплаты.
-        Способом валидации является проверка, указана зарплата или нет'''
+        """Метод для валидации зарплаты.
+        Способом валидации является проверка, указана зарплата или нет"""
         if self.get_average_salary() == 0 or None:
-            return 'Зарплата не указана'
+            return "Зарплата не указана"
         elif self.salary_start == self.salary_end:
-            return f'{self.salary_start}'
-        return f'Зарплата от {self.salary_start} до {self.salary_end}'
+            return f"{self.salary_start}"
+        return f"Зарплата от {self.salary_start} до {self.salary_end}"
 
-#Геттеры и сеттеры для установки и изменения значений зарплаты
+    # Геттеры и сеттеры для установки и изменения значений зарплаты
 
     @property
     def salary_start(self):
