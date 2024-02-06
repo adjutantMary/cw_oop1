@@ -19,7 +19,7 @@ class AddingVacancies(ABC):
         pass
 
     @abstractmethod
-    def delete_vacancies_datas(self):
+    def remove_vacancies_datas(self):
         '''
         Удаление информации о вакансиях
         '''
