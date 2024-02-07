@@ -24,3 +24,13 @@ class AddingVacancies(ABC):
         Удаление информации о вакансиях
         """
         pass
+
+    @abstractmethod
+    def get_instances(self, class_name):
+        '''
+        Словарь из файла JSON в экземпляр класса
+        :param class_name: имя класса
+        :return: list
+        '''
+
+        pass
