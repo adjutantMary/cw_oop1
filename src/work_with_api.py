@@ -1,8 +1,7 @@
-from abc import ABC, abstractmethod
 import requests
+from abc_api import APIWorker
 
-
-class CheckAPI:
+class CheckAPI(APIWorker):
     """Класс для работы с API hh.ru"""
 
     def __init__(self, area=113, page=0, vacancy_in_page=1):
@@ -41,10 +40,12 @@ class CheckAPI:
 
     @staticmethod
     def digit_vacancies(vacancies: list) -> list:
-        """
-        Оформляет
-        :return:
-        """
+        '''
+        Оформляет список вакансий
+        :param vacancies: список вакансий
+        :return: список
+        '''
+
         vacancies_list = []
         for key in vacancies:
             vacancy_name = key.get("name")

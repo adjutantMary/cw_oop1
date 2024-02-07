@@ -1,7 +1,7 @@
 import os.path
 import json
 
-from abstract_adding import AddingVacancies
+from abc_json import AddingVacancies
 from path import JSON_DATA
 
 
