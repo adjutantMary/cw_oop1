@@ -1,5 +1,3 @@
-import os.path
-
 from .vacancy import Vacancy
 
 
@@ -10,6 +8,10 @@ class UserInteractions(Vacancy):
     '''
 
     def __init__(self, vacancy_info: dict):
+        '''
+        Иниуиализация атрибут класса, записывая туда объект Vacancy
+        :param vacancy_info: словарь с вакансиями,который содержится в Vacancy
+        '''
 
         super().__init__(vacancy_info)
         self.vacancy_list = vacancy_info
@@ -46,5 +48,15 @@ class UserInteractions(Vacancy):
         :return: отсортированный список
         '''
 
-        return sorted(self.vacancy_list)
+        return sorted(self.vacancy_list, key=lambda x: x.get_average_salary(), reverse=True)
+
+    def remove_vacancies_without_salary(self):
+        '''
+        Возвращает список вакансий, в которых указана зарплата
+        :return: list
+        '''
+
+        for vacancy in self.vacancy_list:
+            if vacancy.get_average_salary() != 0:
+                return vacancy
 
