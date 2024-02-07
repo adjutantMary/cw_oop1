@@ -4,15 +4,15 @@ class Vacancy:
     Класс поддерживает методы сравнения вакансий
     """
 
-    def __init__(self, info: dict):
-        self.vacancy_name = info.get("name")
-        self.vacancy_area = info.get("area")
-        self.vacancy_url = info.get("url")
-        self.salary_start = info.get("from")
-        self.salary_end = info.get("to")
-        self.currency = info.get("currency")
-        self.experience = info.get("experience", "Не указано")
-        self.requirements = info.get("requirements", "Не указано")
+    def __init__(self, vacancy_info: dict):
+        self.vacancy_name = vacancy_info.get("name")
+        self.vacancy_area = vacancy_info.get("area")
+        self.vacancy_url = vacancy_info.get("url")
+        self.salary_start = vacancy_info.get("from")
+        self.salary_end = vacancy_info.get("to")
+        self.currency = vacancy_info.get("currency")
+        self.experience = vacancy_info.get("experience", "Не указано")
+        self.requirements = vacancy_info.get("requirements", "Не указано")
 
     def get_average_salary(self):
         """Метод для определения средней зарплаты одной вакансии"""
