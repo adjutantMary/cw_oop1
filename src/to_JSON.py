@@ -57,3 +57,23 @@ class SavingInJSON(AddingVacancies):
                     print(f"Вакансии, в которых указана зарплата: {cleared_info}")
         except FileNotFoundError:
             print("Файл не найден")
+
+    def save_json_to_instances(self, class_name):
+        '''
+        Преобразование словаря из JSON в экземпляр класса
+        :param class_name: имя класса
+        :return: list
+        '''
+
+        json_instance = []
+
+        try:
+            data = self.load_vacancies()
+            for i in data:
+                instance = class_name(i)
+                json_instance.append(instance)
+
+        except FileNotFoundError:
+            print('Файл не найден')
+
+        return json_instance
