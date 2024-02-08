@@ -26,4 +26,11 @@ def get_search(json_keeper):
     json_keeper.vacancies_to_json(vacancies_list)
 
 
+def make_top_of_vacancies(vacancies_list, handler):
+    '''
+    Функция возвращает топ N вакансий по зарплате (N запрашивать у пользователя)
+    :param vacancies_list:список полученных вакансий
+    :param handler:экземпляр класса UserMethods
+    :return:список вакансий или пустой список
+    '''
 
