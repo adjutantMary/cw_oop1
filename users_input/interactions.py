@@ -34,3 +34,25 @@ def make_top_of_vacancies(vacancies_list, handler):
     :return:список вакансий или пустой список
     '''
 
+    while True:
+        user_input = int(input(f'\nВведите количество вакансий, который вы хотите вывести в топ'))
+        if user_input == 0 or '':
+            print(f'Число должно быть больше 0 и меньше {len(vacancies_list)}')
+        else:
+            try:
+                if 0 < user_input < len(vacancies_list):
+                    sorted_vacancies = handler.sort_by_salary()[:user_input]
+                else:
+                    sorted_vacancies = handler.sort_by_salary()
+                lower_limit = sorted_vacancies[-1]
+                highest_limit = sorted_vacancies[0]
+
+                print(f'Диапазон зарплат от {lower_limit} до {highest_limit}')
+
+                for vacancy in sorted_vacancies:
+                    print(vacancy)
+
+                return sorted_vacancies
+            except ValueError:
+                print('Введенные данные имеют некорректный формат')
+
