@@ -1,7 +1,7 @@
 from .vacancy import Vacancy
 
 
-class UserInteractions(Vacancy):
+class UserMethods(Vacancy):
 
     '''
     Класс для реализации методов взаимодействия с пользователем
