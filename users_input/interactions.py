@@ -8,7 +8,7 @@ def get_search(json_keeper):
     '''
 
     search_string = input('Введите запрос для поиска вакансии: ')
-    count_vacancies = input(f'Введите количество вакансий, которое вам необходимо получить (не более {VACANCIES_PER_PAGE}')
+    count_vacancies = input(f'Введите количество вакансий, которое вам необходимо получить (не более {VACANCIES_PER_PAGE})')
 
     try:
         count_vacancies = int(count_vacancies)
@@ -55,4 +55,54 @@ def make_top_of_vacancies(vacancies_list, handler):
                 return sorted_vacancies
             except ValueError:
                 print('Введенные данные имеют некорректный формат')
+
+def outputting_vacancies(handler, top_vacancies):
+    '''
+    Вывод вакансий по полученным данным
+    :param handler: экземпляр класса UserMethods
+    :param top_vacancies: список вакансий, полученный после сортировки в топе
+    '''
+
+    user_keywords = input('Введите ключевые слова через пробел').split()
+
+    if user_keywords:
+        user_keywords = handler.get_search_vacancy(top_vacancies, user_keywords)
+
+        if user_keywords:
+            print()
+            print(f'По вашему запросу подходят {len(user_keywords)} вакансий')
+            while True:
+                user_choice = input('Выберите действие:\n'
+                                    '0 - выйти,\n'
+                                    '1 - показать все вакансии\n'
+                                    '2 - сохранить вакансии ')
+                if user_choice == '0':
+                    print('Всего хорошего!')
+                    exit(0)
+                elif user_choice == '1':
+                    for vacancy in top_vacancies:
+                        print(vacancy)
+                    break
+                elif user_choice == '2':
+                    pass
+                    break
+                else:
+                    print('Некорректный ввод')
+        else:
+            print('Нет вакансий, которые бы соответствовали заданным критериям')
+    else:
+        print('Ключевые слова не были введены. Сохранить список вакансий?\n')
+
+        while True:
+            user_choice = input(input('Выберите действие:\n'
+                                    '0 - выйти,\n'
+                                    '1 - записать топ вакансий')
+            if user_choice == '0':
+                print('Всего хорошего')
+                break
+            elif user_choice == '1':
+                pass
+            else:
+                print('Неккоректный ввод')
+
 
