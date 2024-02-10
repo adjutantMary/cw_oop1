@@ -1,3 +1,7 @@
+import os.path
+import csv
+
+from path import USER_DATA
 from .vacancy import Vacancy
 
 
@@ -20,8 +24,8 @@ class UserMethods(Vacancy):
     def get_search_vacancy(list_vacancies: list, keywords: list):
         '''
         Получает вакансии с ключевым словом в описании.
-        :param vacancies_info: список вакансий из Vacancy
-        :param keyword:ключевые слова
+        :param list_vacancies: список вакансий из Vacancy
+        :param keywords:ключевые слова
         :return:список вакансий, который соответствует ключевым словам
         '''
 
@@ -59,4 +63,43 @@ class UserMethods(Vacancy):
         for vacancy in self.vacancy_list:
             if vacancy.get_average_salary() != 0:
                 return vacancy
+
+    @staticmethod
+    def make_directory(dir_name):
+        '''
+        Создание директории для пользователя
+        :param dir_name:
+        '''
+
+        if not os.path.exists(dir_name):
+            try:
+                os.makedirs(dir_name)
+            except OSError as e:
+                print(f'Ошибка при создании директории {dir_name}: {e}')
+
+    def convert_to_csv(self, filename: str, list_vacancies: list):
+        '''
+        Конвертирует данные о вакансиях в csv-файл
+        :param filename: имя файла
+        :param list_vacancies: список вакансий из класса Vacancy
+        :return:
+        '''
+
+        self.make_directory(USER_DATA)
+        filename = filename + '.csv'
+        path = os.path.join(USER_DATA, filename)
+
+        names = [
+            'vacancy_name', 'vacancy_area', 'vacancy_url',
+            '_salary_start', '_salary_end', 'currency',
+            'experience', 'requirements'
+        ]
+
+        with open(filename, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=names)
+            writer.writeheader()
+
+            for vacancy in list_vacancies:
+                writer.writerow(vars(vacancy))
+        print(f'Данные успешно сохранены под именем {filename}')
 
