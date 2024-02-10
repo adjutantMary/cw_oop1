@@ -96,7 +96,7 @@ def outputting_vacancies(handler, top_vacancies):
         while True:
             user_choice = input(input('Выберите действие:\n'
                                     '0 - выйти,\n'
-                                    '1 - записать топ вакансий')
+                                    '1 - записать топ вакансий'))
             if user_choice == '0':
                 print('Всего хорошего')
                 break
@@ -105,4 +105,19 @@ def outputting_vacancies(handler, top_vacancies):
             else:
                 print('Неккоректный ввод')
 
+def save_data_to_csv(handler, vacancies_list):
+    '''
+    Сохраняет информацию о вакансиях в csv - файл
+    :param handler: экземпляр класса UserMethods
+    :param vacancies_list: список вакансий
+    '''
+
+    while True:
+        filename = input('Введите имя файла:\n')
+
+        if filename == '':
+            filename = 'vacancies'
+
+        handler.convert_to_csv(filename, vacancies_list)
+        break
 
